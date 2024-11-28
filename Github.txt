@@ -1,0 +1,576 @@
+Version Control Tools
++++++++++++++++++++++
+
+-> In realtime, multiple people will get involved in project development
+
+-> Developers will be working from different locations
+
+Below are two common problems we will face in project development
+-----------------------------------------------------------------
+1) Code Integration
+2) Monitoring code changes (Who, When, Why and What)
+
+-> Version Control Tools providing solution for above two problems
+
+-> We have several version control tools in the market
+
+1) SVN (Outdated)
+2) GIT Hub
+3) Bit Bucket
+
+-> By using version control tool/sofware we will create a Repository
+
+-> Repository is a location which is used to store project source code. For Every Project one Repository will be created in realtime. Every Repository will have its own URL.
+
+-> Team Members will connect to Repository using Repository URL to perform Code Integrations.
+
+-> Repository will have monitored access 
+		(It will track all the changes like who, when, why and what)
+
+Note: Once we join in the project, team lead or team member will share project Repository URL with us.
+
+Note: We will perform Push and Pull operations in the Repository
+
+	Push means sending code from our system to Repository 
+	Pull means taking latest code from Repository to our System
+
+
+GitHub
+++++++
+-> Git Hub is a cloud provider which is giving hosting, storage services over the web
+
+-> We can create source code repositories in GitHub to store our project code
+
+-> Git Hub providing both free & licensed accounts
+
+		Free Accounts : Limited Functionality
+		Licensed Account : All Functionalities
+
+-> Git Hub will internally uses git as a version control software
+
+
+Environment Setup
+-----------------
+1) Create account in github.com  
+
+	URL : https://github.com/
+
+2) Download Git Client software & install it
+
+	URL : https://git-scm.com/downloads/win
+
+-> After installation, right click on the mouse and check it
+    (Git GUI and Git Bash options will be displayed that means installation success)
+
+
+Git Hub Repositories
+----------------------
+-> Git hub providing 2 types of Repositories
+
+		1) public repository
+		2) private repository
+
+-> public repository means everybody can access and we will choose who can commit to repo
+
+-> private repository means we will choose who can access and who can commit to repo
+
+
+Creating Git Repository
+-----------------------
+-> Login into your github account
+
+-> Go to Repositories tab and click on 'Create New Repository'
+
+-> Enter Repo name and select as 'Public Repo' and create it.
+
+Note: URL will be generated for the repository
+
+	Repo URL : https://github.com/ashokitschool/JRTP20-App1.git
+
+-> It will display commands to push project into repo
+
+$ git init
+$ git commit -m "first commit"
+$ git branch -M main
+$ git remote add origin https://github.com/ashokitschool/JRTP20-App1.git
+$ git push -u origin main
+
+
+
+Push Maven Project into above Git repo by following given commands
+------------------------------------------------------------------
+-> Go to Maven Project folder and open Git Bash
+	(Right click on Mouse -> Open Gitbash here)
+
+
+-> Execute below commands in git bash to introduce yourself to git
+
+$ git config --global user.name "your-uname"
+$ git config --global user.email "your-email"
+
+-> Execute below git commands to push project into repo
+
+$ git init
+$ git add --a
+$ git commit -m "first commit"
+$ git branch -M main
+$ git remote add origin <git-repo-url>
+$ git push -u origin main
+
+Note: It will ask credentials for first time...
+
+Note: We can reset git password in "Credential Manager -> Windows Credentials Manager"
+
+-----------------------------------------------------------------------------------------------
+
+git status
+-----------
+
+-> This command is used to display the files which are staged and un-stage
+
+-> The files which are newly created/modified will be in un-staged state. These files are not eligible for commit.
+
+-> The files which are added to staging elgible for commit.
+
+-> To add file to staging area we will use 'git add' command
+
+
+git add
+-------
+-> This command is used to add file/files to staging area
+
+	$ git add <filename>  (It will add given file)
+	$ git add --a	(It will add all modified/newly created files)
+
+
+git restore
+-----------
+-> This command is used to unstage the file
+
+	$ git restore --staged <filename>
+
+git commit
+----------
+-> This command is used to commit staged files to local repository
+
+	$ git commit -m 'commit-msg'
+
+
+git push
+--------
+-> This command is used to push changes from local repository to central repository
+
+	$ git push
+
+
+Note: If we want to push code to brand new repository then we should configure remote repo url using below command.
+
+	$ git remote add origin <git-repo-url>
+
+
+git log
+-------
+-> This command is used to display commits history with commit-id and commit-message
+
+		$ git log
+
+
+git clone
+---------
+-> This command is used to take project from repository to local machine
+
+		$ git clone <repo-url>
+
+Note: When we join in the project, we have to clone the project from repo to start our work. We can take repo url from team members.
+
+
+git pull
+--------
+-> This command is used to take latest changes from repository
+
+		$ git pull
+
+
+Note: 
+-> clone command we will use for first time to take entire project from repository.
+-> pull command we will use daily, to take latest change from repository.
+
+
+-> We should be very careful while executing 'pull' command because it may give conflicts if we have different changes in central repository and local repository.
+
+Best Practise : Before making any changes in local, first take latest changes from central repository using pull command. Before pushing changes, take latest changes then merge your changes and push it.
+
+Note: Getting conflicts is common problem when we do pull, we have to resolve conflicts manually and we have to push the files to central repository.
+
+
+--------------------------------------------------------------------------------------------------------------
+
+
+=> When we do commit, it will generate unique commit id with 40 characters length. From that commit id it will display first 7 characters in git repo.
+
+	Original Commit Id : ea69d669c8cfe9d6381868ff7ea2cf63e0e185dc
+
+-----------------------------------------------------------------------------------------------
+
+=> After making code changes, if we want to remove those channes from working tree (local file) then we can use 'restore' command
+
+			$ git restore <filename>
+			$ git restore .
+
+Note: When the files are un-staged then 'git restore' is used to discard the changes in working directory. When files are staged then 'git restore' is used to un-stage the files.
+
+--------------------------------------------------------------------------------------------
+
+-> Today morning @ 7 AM , manager assigned me one bug (BUG-ID : 101) and asked me to fix it.
+
+-> I have started bug fixing by making code changes 
+	(i am working on it, modified few java files - work status is IN-PROGRESS)
+
+-> Manager called me @11:00 AM and told me, Ashok 101-BUG is not priority now... please work on BUG_ID : 121 which is high priority. After 121 bug got fixed then you can continue fixing 
+BUG-ID : 101
+
+
+The problem is , i have modifed few files for BUG-101 fix. As issue fix is not comleted, i can't commit the modified files and i can't delete the changes bcz half work is completed.
+
+	********** In this scenario we will use 'git stash' command****************
+
+-> 'git stash' command is used to save our changes to temporay storage and make working tree clean.
+
+-> After main work is completed then we can get our stashed changes back using 'stash apply'
+
+	$ git stash
+	$ git stash apply
+
+-----------------------------------------------------------------------------------------------
+git config
+git init
+git status
+git add <filename>
+git add --a
+git commit -m 'msg'
+git restore
+git remote add orgin <repo-url>
+git push
+git pull
+git log
+git clone
+git stash
+git stash apply
+git diff
+----------------------------------------------------------------------------------------------
+GIT Branches
+----------------------------------------------------------------------------------------------
+
+-> Git branches are used to maintain multiple code bases for the project
+
+-> When we create git repository by default 'main' branch will be created
+
+-> All the source code of the project will be kept in 'main' branch
+
+Note: It is not recommended to do development/ R & D works on 'main' branch directly because existing functionality may break.
+
+-> When we want to work on new task or new experiment then create a branch and work on that branch. Once your code is fully tested and then you can merge your changes to main branch using 'Pull Request'.
+
+-> Working with branch is always safe.
+
+
+-> In realtime, we can see below branches in the repository
+
+main
+feature
+develop
+sit
+uat
+release
+
+
+-> main branch will contains final source code of the project
+
+-> feature branch is used for R & D purpose
+
+-> develop branch is used for development activies
+
+-> SIT branch is used for System Integration Testing (it will done by testing team)
+
+-> UAT branch is used for USER Acceptance Testing (it will done by client)
+
+-> Release branch is used for production deployments (Live deployment)
+
+
+=> In GIT Repo we have option to create branch
+
+    (Select source branch and target branch)
+
+
+//to clone default branch we will use below command
+$ git clone <repo-url>
+
+//to clone specific branch we will use below command
+$ git clone -b <branch-name> <repo-url>
+
+
+=> We can merge changes from one branch to another branch using 'Pull Request'
+
+
+Workflow
+++++++++++
+
+-> Create Git Repo and push your project (main branch will be created)
+
+-> Create new branch (feature) from 'main' branch
+
+-> Clone 'feature' branch using below command
+
+	$ git clone -b feature <repo-url>
+
+-> Make some changes in feature branch code and push those changes to repository
+
+-> Go to git hub repository it will ask to create 'pull request' to merge 'feature' branch changes to 'main' branch
+
+-> Open Pull Request and Merge the changes from 'feature' branch to main branch
+   (If you want then you can delete feature branch)
+
+
+Note: When we are merging changes from one branch to another branch there is a chance of getting conflicts. We have to resolve those conflicts and we have to merge.
+
+-----------------------------------------------------------------------------------------------
+
+-> 'git checkout' command is used to switch from one branch to another branch
+
+		$ git checkout <branch-name>
+
+workflow
++++++++++
+-> clone feature branch from repo
+
+-> Navigate to project and check branch name (it will display as feature)
+
+		$ git branch
+
+-> Execute 'git checkout main' then you will be switched to main branch
+
+		$ git checkout main
+
+		$ git branch
+
+-----------------------------------------------------------------------------------------------
+
+Branches in Git Hub
+Branch Creation
+Cloning specific branch
+Merging branches
+Pull Request
+What is conflict
+How to resolve conflicts
+
+----------------------------------------------------------------------------------------------
+Today's agenda
++++++++++++++++
+git merge vs git rebase
+source tree (git client)
+Bitbucket
+working with repositories from IDE
+-----------------------------------------------------------------------------------------------
+
+-> git merge & git rebase commands are used to merge changes from one branch to another branch
+
+git merge vs git rebase
+-------------------------
+These commands are used to merge changes from 1 branch to another branch.
+
+git merge
+git rebase
+
+//merge demo
+-> Create a new folder (merge-demo) and navtigate into that folder using git bash and execute below commands
+
+git status
+git init
+touch m1.txt
+git status
+git add .
+git status
+git commit -m "added m1.txt"
+git status
+git log
+
+git branch feature
+git checkout feature
+git status
+
+Note: From master we have created feature branch
+
+touch f1.txt
+git status
+git add .
+git commit -m 'added f1.txt"
+git status
+git log
+
+Feature contains m1.txt and f1.txt
+
+if you swtich to master you can see only m1.txt 
+git checkout master
+
+
+//i will make few more changes to master
+
+git status
+git touch m2.txt
+git add .
+git commit -m 'added m2.txt"
+git log
+
+
+The changes happend in master branch are relevant to feature. I want to get master branch changes to feature branch. 
+
+we have two options
+
+git merge
+git rebase
+
+git checkout feature  (i have m1.txt and f1.txt but m2.txt not available)
+git merge master (m2.txt also we got into feature)
+git log
+
+Note: git merge command, commited all master branch changes to feature branch.
+
+Note: See commit history we can see that at what time merge happend it is displaying that.
+
+
+//rebase demo
+=> Create rebase-demo folder and navigate to that folder and open cmd and execute below commands
+
+git init
+git status
+touch m1.txt 
+git add .
+git commit -m 'added m1.txt'
+git log
+
+
+git branch feature
+git checkout feature
+git status
+git log
+touch f1.txt
+git add .
+git commit -m 'added f1.txt'
+git status
+git log
+
+//making few more changes to master
+git checkout master
+touch m2.txt
+git add .
+git commit -m 'added m2.txt'
+git log
+git checkout feature
+git status
+
+git rebase master (master branch changes will come to feature brach)
+git log
+
+Note: In commit history at that time we have done rebase will not displayed.
+-----------------------------------------------------------------------------------------------
+Note: Git merge will maintain commits history and it will log when merge happend
+Note: Git rebase will make commit history linear. 
+---------------------------------------------------------------------------------------------
+
+
+
+Bitbucket
+---------------------------------------------------------------------------------------------
+Bitbucket is a Git-based source code repository hosting service owned by Atlassian. Bitbucket offers both commercial plans and free accounts with an unlimited number of private repositories.
+
+-> Create free account in bitbucket
+
+		URL : https://bitbucket.org/
+
+-> Create Repository in bitbucket (You can choose public or private)
+
+-> clone that repository and perform git operations using 'git bash' client
+
+
+Note: GIT Bash commands are same for both 'Git Hub repository' and 'BitBucket Repository'
+
+-> In Bit Bucket also we have public & private repositories
+
+		- We have branches
+		- We have pull requests
+
+-----------------------------------------------------------------------------------------------
+=> As of now we have used to 'git bash' to execute git commands. Git commands are used to perform Git operations like clone, commit, push, pull etc..
+
+
+=> We have some GUI softwares also to perform GIT operations
+
+		- Tortoise GIT
+		- Source TREE
+		- GIT GUI
+
+
+Note: We have flexibility to use any client software to perform git operations.
+
+----------------------------------------------------------------------------------------------
+
+-> Download Source tree software and install it
+
+	URL : https://www.sourcetreeapp.com/
+
+-> Open source tree software there we can see all the options
+
+-> Click on clone option and choose repo and url and desitnation path
+
+	Git Hub Repo URL : https://github.com/ashokitschool/JRTP20-App1.git
+
+Note: It will clone git repo to given destination path
+
+-> Modify the files then you can see those modified files in source tree under 'unstaged' section
+
+-> Click on 'Stage All' button then those files will be staged
+
+-> Click on Commit button and enter commit msg and select 'Push' immediately checkbox and click on 'Submit' button.
+
+-> Our changes will be committed and pushed to git hub repository.
+
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
